@@ -1,0 +1,88 @@
+
+.card {
+    background: #f9fafb;
+    padding: 15px 18px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+
+.card:hover{
+    background-color:antiquewhite;
+}
+
+h4, h5, h6, p {
+    margin: 0;
+}
+
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon {
+    color: blue;
+}
+
+
+.company {
+    font-weight: 600;
+}
+
+.role {
+    color: #6b7280;
+}
+
+
+.status {
+    background-color: #f59e0b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.status:hover{
+    background-color: #6366f1; 
+}
+
+
+.delete {
+    color: red;
+    cursor: pointer;
+}
+
+
+.middle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.small-icon {
+    font-size: 16px;
+}
+
+
+.notes-box {
+    background-color: #e5e7eb;
+    color: #6b7280;
+    padding: 8px 14px;
+    border-radius: 10px;
+    margin-top: 8px;
+    font-size: 13px;
+}
+

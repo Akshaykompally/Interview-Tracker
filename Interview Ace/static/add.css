@@ -1,0 +1,85 @@
+.container {
+    width: 90%;
+    max-width: 750px;
+    min-height: 500px;
+    height: auto;
+    border: 2px solid black;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.create {
+    text-align: center;
+    font-size: 35px;
+    margin-top: 40px;
+}
+
+.side,
+.side1 {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.input-group {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.text {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.label {
+    margin-top: 8px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background: #f9fafb;
+}
+
+.side2 {
+    margin-top: 20px;
+}
+
+.find-out {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    resize: none;
+}
+
+.btn {
+    margin-top: 20px;
+}
+
+.btn button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #4f46e5;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .side,
+    .side1 {
+        flex-direction: column;
+    }
+}

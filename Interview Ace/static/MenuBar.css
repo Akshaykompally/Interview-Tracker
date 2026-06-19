@@ -1,0 +1,161 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+}
+
+/* MAIN LAYOUT */
+
+.main-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 300px;
+  background: #fafafa;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* TOP */
+
+.top-section {
+  padding: 30px 24px;
+}
+
+/* LOGO */
+
+.logo h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.logo h1 span {
+  color: #4f46e5;
+}
+
+.logo p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* MENU */
+
+.menu {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* MENU ITEM */
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  padding: 14px 16px;
+  border-radius: 14px;
+  color: #5b6475;
+  font-size: 16px;
+  font-weight: 500;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+/* ICON */
+
+.menu-item .material-symbols-outlined {
+  font-size: 22px;
+}
+
+/* HOVER */
+
+.menu-item:hover {
+  background: #ececff;
+  color: #4338ca;
+}
+
+/* ACTIVE */
+
+.menu-item.active {
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+}
+
+/* LOGOUT */
+
+.logout:hover {
+  background: #ececff;
+  color: #1705d8;
+}
+
+/* CONTENT AREA */
+
+.content-area {
+    flex: 1;
+    padding: 30px;
+    background: white;
+    overflow-y: auto;
+}
+
+/* CONTENT SECTION */
+
+.content-section {
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .content-area {
+        padding: 15px;
+    }
+
+    .menu {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .menu-item {
+        min-width: 160px;
+    }
+}

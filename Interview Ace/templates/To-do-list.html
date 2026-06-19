@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='to-do-list.css') }}">
+    <title>Interview History</title>
+</head>
+<body>
+
+    <div class="tracks">
+        <div class="n-interviews">
+            <span class="material-symbols-outlined">trip</span>
+            <div class="content">
+                <h1>{{n_interviews}}</h1>
+                <span class="text">Total Interviews</span>
+            </div>
+        </div>
+
+    
+        <br><br>
+
+        <div class="n-interviews">
+            <span class="material-symbols-outlined" id="a">check_circle</span>
+            <div class="content">
+                <h1>{{accept}}</h1>
+                <span class="text">Accepted</span>
+            </div>
+        </div>
+
+    
+        <br><br>
+
+        <div class="n-interviews">
+            <span class="material-symbols-outlined" id="r">cancel</span>
+            <div class="content">
+                <h1>{{reject}}</h1>
+                <span class="text">Rejected</span>
+            </div>
+        </div>
+
+        <br><br>
+    
+        <div class="n-interviews">
+            <span class="material-symbols-outlined" id="p">hourglass_top</span>
+            <div class="content">
+                <h1>{{pending}}</h1>
+                <span class="text">Pending</span>
+            </div>
+        </div>
+
+    </div>
+
+    {% if labels|length > 0 and round_labels|length > 0 %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <div class="graphs">
+        <div class="chart">
+            <canvas id="statusChart" width="300" height="300"></canvas>
+        </div>
+        
+
+        
+        <!-- This is a Pie chart for the progress of interviews  --> 
+        <script>    
+            const labels = {{ labels | tojson }};
+            const data = {{ data | tojson }};
+
+            console.log(labels);  
+            console.log(data);    
+
+            const ctx = document.getElementById('statusChart');
+
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ['#f59e0b', '#22c55e', '#ef4444']
+                    }]
+                },
+            options: {
+                plugins:{
+                    legend:{
+                        labels:{
+                            usePointStyle:true,
+                            poinyStyle:'circle'
+                        }
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false   
+            }
+        });
+        </script>
+
+
+        <div class="barchart">
+            <canvas id="roundChart"></canvas>
+        </div> 
+
+         <!-- This is a Bar chart for the progress of number of rounds they are attended -->
+        <script>    
+            const roundLabels = {{ round_labels  | tojson }};
+            const roundData = {{ round_data | tojson }};
+
+            console.log(roundLabels);  
+            console.log(roundData);    
+
+            const ctx2 = document.getElementById('roundChart');
+
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: roundLabels,
+                    datasets: [{
+                        label: "Rounds Attended",
+                        data: roundData,
+                        backgroundColor:'#3b82f6',
+                        barThickness: 50,
+                        borderRadius:10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+        
+                    scales: {
+                        x: {
+                            categoryPercentage: 0.6,  
+                            barPercentage: 0.6     
+                        }
+                    }  
+                }
+            });
+        </script>
+
+    </div> 
+    {% else %}
+        <div class="No-logs">
+            <p>No interviews recorded yet. Add your first interview to see analytics!</p>
+        </div>
+    {% endif %}
+
+    <button class="chatbot-toggler">
+      <span class="material-symbols-rounded">robot_2</span>
+      <span class="material-symbols-outlined">close</span>
+    </button>
+
+    <div class="chatbot">
+        <header>
+            <h2>Chatbot</h2>
+                <span class="close-btn material-symbols-outlined">close</span>
+        </header>
+        <ul class="chatbox">
+            <li class="chat incoming">
+                <span class="material-symbols-outlined">smart_toy</span>
+                <p>Hi there <br>How can I help you today?</p>
+            </li>
+        </ul>
+        <div class="chat-input">
+            <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+            <span id="send-btn" class="material-symbols-rounded">send</span>
+    </div>
+
+    <script>
+        const chatbotToggler = document.querySelector(".chatbot-toggler");
+        const closeBtn = document.querySelector(".close-btn");
+        const chatbox = document.querySelector(".chatbox");
+        const chatInput = document.querySelector(".chat-input textarea");
+        const sendChatBtn = document.querySelector("#send-btn");
+
+        let userMessage = null;
+        const inputInitHeight = chatInput.scrollHeight;
+
+        /* Groq API Configuration */
+        /* Use a newly regenerated API key here (recommended) */
+        const API_KEY = "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";
+
+        const API_URL = "https://api.groq.com/openai/v1/chat/completions";
+
+
+        /* Create Chat Box */
+        const createChatLi = (message, className) => {
+            const chatLi = document.createElement("li");
+            chatLi.classList.add("chat", className);
+
+            let chatContent =
+                className === "outgoing"
+                    ? `<p></p>`
+                    : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+
+            chatLi.innerHTML = chatContent;
+            chatLi.querySelector("p").textContent = message;
+
+            return chatLi;
+        };
+
+
+        /* Generate Bot Response */
+        const generateResponse = async (chatElement) => {
+            const messageElement = chatElement.querySelector("p");
+
+            const requestOptions = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${API_KEY}`
+                },
+
+                body: JSON.stringify({
+                    model: "llama-3.3-70b-versatile",
+                    messages: [
+                        {
+                            role: "user",
+                            content: userMessage
+                        }
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 500
+                })
+            };
+
+        try {
+            const response = await fetch(API_URL, requestOptions);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error.message);
+            }
+
+            let botReply = data.choices[0].message.content;
+
+            botReply = botReply.replace(/\*\*(.*?)\*\*/g, "$1");
+
+            messageElement.textContent = botReply;
+        }
+        catch (error) {
+            messageElement.classList.add("error");
+            messageElement.textContent = error.message;
+        }
+        finally {
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+        }
+    };
+
+
+        /* Handle Chat */
+        const handleChat = () => {
+            userMessage = chatInput.value.trim();
+
+            if (!userMessage) return;
+
+            chatInput.value = "";
+            chatInput.style.height = `${inputInitHeight}px`;
+
+            /* User Message */
+            chatbox.appendChild(
+                createChatLi(userMessage, "outgoing")
+            );
+
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+
+            setTimeout(() => {
+                /* Thinking Message */
+                const incomingChatLi =
+                    createChatLi("Thinking...", "incoming");
+
+                chatbox.appendChild(incomingChatLi);
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+
+                generateResponse(incomingChatLi);
+            }, 600);
+        };
+
+
+        /* Auto Resize Textarea */
+        chatInput.addEventListener("input", () => {
+            chatInput.style.height = `${inputInitHeight}px`;
+            chatInput.style.height = `${chatInput.scrollHeight}px`;
+        });
+
+
+        /* Enter Key Support */
+        chatInput.addEventListener("keydown", (e) => {
+            if (
+                e.key === "Enter" &&
+                !e.shiftKey &&
+                window.innerWidth > 800
+            ) {
+                e.preventDefault();
+                handleChat();
+            }
+        });
+
+
+        /* Button Events */
+        sendChatBtn.addEventListener("click", handleChat);
+
+        closeBtn.addEventListener("click", () => {
+            document.body.classList.remove("show-chatbot");
+        });
+
+        chatbotToggler.addEventListener("click", () => {
+            document.body.classList.toggle("show-chatbot");
+        });
+    </script>
+</body>
+</html>

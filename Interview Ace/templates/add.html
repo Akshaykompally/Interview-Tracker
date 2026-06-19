@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='add.css') }}">
+    <title>Add Interview</title>
+</head>
+<body>
+    <h3 class="create">Add Interview Round</h3>
+
+    <div class="add-wrapper">
+
+    <h3 class="create">Add Interview Round</h3>
+
+    <form action="{{ url_for('add_interview') }}" method="POST">
+
+        <div class="container">
+
+            <div class="side">
+
+                <div class="input-group">
+                    <label class="text">Company Name</label>
+
+                    <input
+                        class="label"
+                        type="text"
+                        name="company-name"
+                        placeholder="Google"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label class="text">Role</label>
+
+                    <input
+                        class="label"
+                        type="text"
+                        name="role"
+                        placeholder="Software Engineer"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="side1">
+
+                <div class="input-group">
+                    <label class="text">Interview Date</label>
+
+                    <input
+                        class="label"
+                        type="date"
+                        name="date"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label class="text">Status</label>
+
+                    <select
+                        class="label"
+                        name="status"
+                        required
+                    >
+                        <option value="">Select</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="side2">
+
+                <div class="input-group">
+                    <label class="text">Rounds Attended</label>
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <input type="checkbox" name="choice" value="Aptitude">
+                        Aptitude
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <input type="checkbox" name="choice" value="Coding">
+                        Coding
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <input type="checkbox" name="choice" value="Technical">
+                        Technical
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <label>
+                        <input type="checkbox" name="choice" value="HR">
+                        HR
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="find-out">
+
+                <div class="input-group">
+
+                    <label class="text">
+                        Notes / Mistakes
+                    </label>
+
+                </div>
+
+            </div>
+
+            <textarea
+                name="notes"
+                rows="5"
+                placeholder="What went wrong?"
+                required
+            ></textarea>
+
+            <div class="btn">
+
+                <button type="submit">
+                    Save Interview
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+</body>
+</html>

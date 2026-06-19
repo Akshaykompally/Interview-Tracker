@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <title>Interview Ace</title>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+
+
+    <div class="nav">
+
+        <h1 class="title">
+            <span class="highlight1">Interview</span> 
+            <span class="highlight2">Tracker</span>
+        </h1>
+        <div class="nav-links">
+            <a class="sign" href="{{ url_for('login_page') }}">Sign In</a>
+            <a class="get-started" href="{{ url_for('login_page') }}">Get Started</a>
+        </div>
+    </div>
+    
+
+    <br>
+
+    <!-- Main Content -->
+
+    <div class="main-content">
+        <h2> Ace Your Next Interview
+            <br>
+            <span class="with"> with </span>
+            <span class="blue"> Data-Driven </span>
+            <span class="black"> Prep </span>
+        </h2>
+    </div>
+    
+    <div class="description-container">
+        <p class="description">
+            Track every interview, visualize your performance trends, and get
+        </p>
+        <p class="second-description">
+            AI-powered suggestions to improve where it matters most.
+        </p>
+    </div>
+
+    <br><br>
+    
+    <div class="btn">
+        <a class="start-tracking" href="{{ url_for('login_page') }}">Start Tracking &#8594</a>
+    </div> 
+
+    <br><br><br><br>
+     
+    <!-- Features Section -->
+
+    <div class="container">
+        <div class="track-interviews">
+            <span class="material-symbols-outlined">assignment_add</span>
+            <h3> Tracker Interviews</h3>
+            <p class="track">
+                Log every interview with company, role, round, and outcome details.
+            </p>
+        </div>
+
+        <div class="track-interviews">
+            <span class="material-symbols-outlined">bar_chart</span>
+            <h3> Visual Dashboards</h3>
+            <p class="track">
+                See your progress with interactive charts and success rate analytics.
+            </p>
+        </div>
+
+        <div class="track-interviews">
+            <span class="material-symbols-outlined">neurology</span>
+            <h3> AI Insights</h3>
+            <p class="track">
+                Get personalized suggestions to improve based on your patterns.
+            </p>
+        </div>
+
+        <div class="track-interviews">
+           <span class="material-symbols-outlined">trending_up</span>
+            <h3> Spot Trends</h3>
+            <p class="track">
+                Identify which rounds trip you up and focus your preparation.
+            </p>
+        </div>
+    </div>
+
+
+    <br><br>
+
+    <!-- Footer -->
+     
+    <footer>
+        <p>Built for job seekers who want to improve systematically.</p>  
+    </footer>
+
+</body>
+</html>

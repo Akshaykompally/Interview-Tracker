@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <title>Sign In</title>
+</head>
+<body>
+    <form method="POST" action="{{ url_for('login_page') }}">
+        <div class="main">
+
+        <div class="heading">
+            <h1 class="title">
+                <span class="highlight1">Interview</span>
+                <span class="highlight2">Tracker</span>
+            </h1>
+        </div>
+
+        <span class="highlight3">Track your interviews. Improve with AI insights.</span>
+
+        <div class="container">
+            <h3 class="create">Welcome Back</h3>
+            <span class="lower">Sign in to continue</span>
+        </div>
+
+        <div class="input-group">
+            <label for="email" class="text">Email</label>
+            <input class="label" type="email" id="email" name="email" placeholder="john.doe@example.com" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password" class="text">Password</label>
+            <input class="label" type="password" id="password" name="password" placeholder="••••••••" required>
+        </div>
+
+        <div class="btn">
+            <button type="submit">Sign In</button>
+        </div>
+
+        
+        <p class="footer">Don't have an account?<a href="{{ url_for('signup_page') }}"> Sign Up</a></p>
+    
+        </div>
+    </form>
+
+
+</body>
+</html>

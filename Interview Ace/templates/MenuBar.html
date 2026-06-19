@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='MenuBar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='to-do-list.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='add.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='History.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="main-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="top-section">
+
+            <div class="logo">
+                <h1><span>Interview</span> Tracker</h1>
+                <p>Track · Analyze · Improve</p>
+            </div>
+
+            <nav class="menu">
+
+                <!-- DASHBOARD -->
+                <div
+                    class="menu-item active"
+                    onclick="showSection('dashboard-section', this)"
+                >
+                    <span class="material-symbols-outlined">
+                        space_dashboard
+                    </span>
+
+                    <span>Dashboard</span>
+                </div>
+
+                <!-- ADD INTERVIEW -->
+                <div
+                    class="menu-item"
+                    onclick="showSection('add-section', this)"
+                >
+                    <span class="material-symbols-outlined">
+                        add
+                    </span>
+
+                    <span>Add Interview</span>
+                </div>
+
+                <!-- HISTORY -->
+                <div
+                    class="menu-item"
+                    onclick="showSection('history-section', this)"
+                >
+                    <span class="material-symbols-outlined">
+                        history
+                    </span>
+
+                    <span>History</span>
+                </div>
+
+            </nav>
+
+        </div>
+
+        <!-- LOGOUT -->
+        <div class="bottom-section">
+
+            <a href="{{ url_for('logout') }}" class="menu-item logout">
+
+                <span class="material-symbols-outlined">
+                    logout
+                </span>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- RIGHT CONTENT -->
+    <div class="content-area">
+
+        <!-- DASHBOARD SECTION -->
+        <div
+            id="dashboard-section"
+            class="content-section"
+            style="display: block;"
+        >
+
+            {% include 'To-do-list.html' %}
+
+        </div>
+
+        <!-- ADD INTERVIEW SECTION -->
+        <div
+            id="add-section"
+            class="content-section"
+            style="display: none; width:100%;"
+        >
+
+            {% include 'add.html' %}
+
+        </div>
+
+        <!-- HISTORY SECTION -->
+        <div
+            id="history-section"
+            class="content-section"
+            style="display: none;"
+        >
+
+            {% include 'History.html' %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const menuItems =
+        document.querySelectorAll(".menu-item");
+
+    const sections =
+        document.querySelectorAll(".content-section");
+
+    window.showSection = function(sectionId, clickedItem) {
+
+        sections.forEach(section => {
+
+            section.style.display = "none";
+
+        });
+
+        const activeSection =
+            document.getElementById(sectionId);
+
+        if (activeSection) {
+
+            activeSection.style.display = "block";
+
+        }
+
+        menuItems.forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+        clickedItem.classList.add("active");
+    };
+
+});
+
+</script>
+
+</body>
+</html>

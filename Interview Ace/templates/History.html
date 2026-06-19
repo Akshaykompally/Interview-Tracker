@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='History.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    {% for values in result %}
+
+<div class="card">
+
+    <div class="top-row">
+
+        <div class="left">
+
+            <span class="material-symbols-outlined icon">
+                corporate_fare
+            </span>
+
+            <span class="company">
+                {{ values[1] }}
+            </span>
+
+            <span class="dash">—</span>
+
+            <span class="role">
+                {{ values[2] }}
+            </span>
+
+            <span class="status">
+                {{ values[4] }}
+            </span>
+
+        </div>
+
+        <a
+            class="delete"
+            href="{{ url_for('delete_interview', id=values[0]) }}"
+        >
+            <span class="material-symbols-outlined">
+                delete
+            </span>
+        </a>
+
+    </div>
+
+    <div class="middle-row">
+
+        <span class="material-symbols-outlined small-icon">
+            calendar_today
+        </span>
+
+        <span class="date">
+            {{ values[3] }}
+        </span>
+
+        <span class="rounds">
+            Rounds: {{ values[5] }}
+        </span>
+
+    </div>
+
+    <div class="notes-box">
+        {{ values[6] }}
+    </div>
+
+</div>
+
+{% endfor %}
+</body>
+</html>
