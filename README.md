@@ -63,3 +63,27 @@ Interview Tracker is a full-stack web application that helps job seekers organiz
 
 ## 📂 Project Structure
 
+Interview-Tracker/
+│
+├── app.py
+│
+├── templates/
+│ ├── Main.html
+│ ├── Login.html
+│ ├── Register.html
+│ ├── MenuBar.html
+│ ├── add.html
+│ ├── History.html
+│ └── To-do-list.html
+│
+├── static/
+│ ├── main.css
+│ ├── login.css
+│ ├── register.css
+│ ├── MenuBar.css
+│ ├── add.css
+│ ├── History.css
+│ └── to-do-list.css
+│
+└── README.md
+
